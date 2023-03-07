@@ -1,0 +1,21 @@
+{
+  "name": "landify",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "author": "nate",
+  "license": "MIT",
+  "dependencies": {
+    "argon2": "^0.30.3",
+    "chalk": "4.1.2",
+    "cors": "^2.8.5",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "@prisma/client": "^4.11.0",
+    "prisma": "^4.11.0"
+  }
+}

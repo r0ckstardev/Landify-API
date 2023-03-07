@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  username String @unique
+  displayname String?
+  email String @unique
+  password String
+  role Role @default(user)
+  avatarURL String?
+  apartments Apartment[] @relation("owner")
+  rentedApartments Apartment[] @relation("tenant")
+}
+
+model Apartment {
+  id Int @id @default(autoincrement())
+  title String @unique
+  description String @default("No Description Provided ")
+  size String? @default("No Size Provided ")
+  rooms String? @default("No Amount of Rooms Provided ")
+  electricityBill String? @default("No Electricity Bill Provided ")
+  price Int
+  address String @unique
+  owner User @relation(fields: [ownerId], references: [id], name: "owner")
+  ownerId Int
+  rentedBy User @relation(fields: [tenantId], references: [id], "tenant")
+  tenantId Int
+}
+
+enum Role {
+  user
+  tenant
+  lanlord
+  admin
+}
+
