@@ -19,16 +19,17 @@ export async function logUser(req, res) {
         .send({ message: "Couldn't find the user you're looking for." });
     }
 
-    const comparedPass = verify(password, dbUser.password);
+    const comparedPass = verify(dbUser.password, password);
     if (!comparedPass) {
       res.status(401).send({ message: "Invalid Credentials." });
     }
 
-    const token = await signJWT();
+    const token = await signJWT(req, res);
 
     res.status(200).send({
       username: dbUser.username,
       token: token,
+      message: "Succesfully Logged in."
     });
   } catch (error) {
     console.log(error);
